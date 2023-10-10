@@ -1,16 +1,27 @@
-<div id="main">
-    <div>
-        <h1>Log in</h1>
+<div class="login">
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="wrapper">
+        <form action="/login" method="post">
+            <h1>Login</h1>
+            <div class="input-box">
+                <input type="text" placeholder="Username" name="un" id="un" required>
+                <i class="bx bxs-user"></i>
+            </div>
+
+            <div class="input-box">
+                <input type="password" placeholder="Password" name="pw" id="pw" required>
+                <i class="bx bxs-lock-alt"></i>
+            </div>
+
+            <button type="submit" class="btn">Login</button>
+
+            <div class="register-link">
+                <p>Dont have an account? <a href="#">Register</a></p>
+            </div>
+        </form>
+
     </div>
-    <form action="/login" method="post">
-        <fieldset>
-            <label for="un">Username: </label>
-            <input type="text" name="un" id="un" required="required">
-            <br />
-            <label for="pw">Password: </label>
-            <input type="password" name="pw" id="pw" required="required">
-            <br />
-        </fieldset>
-        <input type="submit" value="Login">
-    </form>
-</div>
+</div> 

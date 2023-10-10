@@ -8,8 +8,7 @@
 }
 
 body {
-    background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(245,220,8,1) 0%, rgba(251,89,121,1) 100%);
+    background: #e8ecfd;
     margin: 0px;
     padding: 0px;
     font-family: 'Times New Roman', Times, serif;
@@ -111,13 +110,13 @@ ul {
 
 .navbar {
     font-family: 'Times New Roman', Times, serif;
-    background:#0082e6 ;
+    background:#4139ea ;
     height: 110px;
     width: 100%;
 }
 
 label.logo {
-    color: white;
+    color: #03081c;;
     font-size: 35px;
     line-height: 110px;
     padding: 0 100px;
@@ -136,7 +135,7 @@ label.logo {
 }
 
 .navbar ul li a {
-    color: white;
+    color: #03081c;
     font-size: 20px;
     padding: 7px 13px;
     border-radius: 3px;
@@ -145,9 +144,10 @@ label.logo {
 }
 
 .navbar a:hover{
-    background: #1b9bff;
+    background: #9b14bd;
     transition: .5s;
 } 
+
 
 /* ------------------------------- */
 /*      THIS IS FOR THE FOOTER     */
@@ -159,11 +159,10 @@ footer {
     padding: 8px;
     list-style-type: none;
     overflow: hidden;
-    background-color: #777;
-    color: white;
+    background-color: #e6a7f6;
+    color: #03081c;;
     height: 80px;
     width: 100vw;
-    margin-top: 200px;
 }
 
 footer div {

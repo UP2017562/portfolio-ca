@@ -4,27 +4,27 @@
         <span>My Recent posts</span>
         <h3>My Blogs</h3>
     </div> 
-        <div class="blog-container">
-            {{#if dbError}}
-                <div>
-                    Sorry, there was a problem with the database:<br />
-                    {{theError}}
-                </div>   
-            {{else}}
-            {{#each blogs}}
-                <div class="blog-box">
-                    <div class="blog-img">
-                        <img src="{{blog_image}}" alt="blog">
-                    </div>
-
-                    <div class="blog-text">
-                        <span>{{blog_date}} / Sweden</span>
-                        <a class="blog-title">{{blog_title}}</a>
-                        <p>{{blog_desc}}</p>
-                    </div>
+    <div class="blog-container">
+        {{#if dbError}}
+            <div>
+                Sorry, there was a problem with the database:<br />
+                {{theError}}
+            </div>   
+        {{else}}
+        {{#each blogs}}
+            <div class="blog-box">
+                <div class="blog-img">
+                    <img src="{{blog_image}}" alt="blog">
                 </div>
-                
-            {{/each}}
-    {{/if}}
+
+                <div class="blog-text">
+                    <span>{{blog_date}}</span>
+                    <a class="blog-title">{{blog_title}}</a>
+                    <p>{{blog_desc}}</p>
+                </div>
+            </div>
+            
+        {{/each}}
+        {{/if}}
     </div>
 </section>

@@ -207,17 +207,6 @@ app.get('/', (req, res) => {
     res.render('home.handlebars', model)
   })
 
-
-app.get('/blogs', (req, res) => {
-    const model={
-        style: "blogs.css",
-        isLoggedIn: req.session.isLoggedIn,
-        name: req.session.name,
-        isAdmin: req.session.isAdmin
-      }
-    res.render('blogs.handlebars', model)
-})
-
 app.get('/contact', (req, res) => {
     const model={
       style: "contact.css",
