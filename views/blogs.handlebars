@@ -1,40 +1,30 @@
-<div id="main">
-    <div class="container">
-        <h1>My Blogs</h1>
+<section id="blog">
 
-        {{#if isAdmin}}
-            <div>
-                <a href="/blogs/new" class="btn btn-link"> New Blogs </a>
-            </div>
-        {{/if}}
-        <div class="columns col-gapless">
+    <div class="blog-heading">
+        <span>My Recent posts</span>
+        <h3>My Blogs</h3>
+    </div> 
+        <div class="blog-container">
             {{#if dbError}}
                 <div>
                     Sorry, there was a problem with the database:<br />
                     {{theError}}
-                </div>    
+                </div>   
             {{else}}
-                {{#each blogs}}
-                    <div class="column col-4 col-md-6 col-sm-12">
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="{{blog_image}}" alt="{{blog_image}}" class="img-responsive">
-                            </div>
-                            <div class="card-header">
-                                <div class="card-title h3">{{blog_title}}</div>
-                                <div class="card-subtitle text-gray">{{blog_desc}} -- {{blog_date}}</div>                            
-                            </div>
-                            <div class="card-footer">
-                                {{#if ../isAdmin}}
-                                <div>
-                                    <a href="/blogs/update/{{pid}}"> Modify </a> - <a href="/projects/delete/{{pid}}" class="important"> Delete </a>
-                                </div>
-                                {{/if}}
-                            </div>
-                        </div>
+            {{#each blogs}}
+                <div class="blog-box">
+                    <div class="blog-img">
+                        <img src="{{blog_image}}" alt="blog">
                     </div>
-                {{/each}}
-            {{/if}}
-        </div>
+
+                    <div class="blog-text">
+                        <span>{{blog_date}} / Sweden</span>
+                        <a class="blog-title">{{blog_title}}</a>
+                        <p>{{blog_desc}}</p>
+                    </div>
+                </div>
+                
+            {{/each}}
+    {{/if}}
     </div>
-</div>
+</section>

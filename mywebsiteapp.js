@@ -96,8 +96,9 @@ db.run("CREATE TABLE blogs (blogs_id INTEGER PRIMARY KEY, blogs_uid INTEGER, blo
       console.log("---> Table blogs created!")
   
       const blogs=[
-        { "id":"1", "uid":"1", "title":"Sweden", "image": "", "desc": "Currently I am in Sweden enjoying an exchange year!!! Meeting loads of new friends!", "date": "19/08/2023"},
-        { "id":"2", "uid":"1", "title":"Second Year Uni", "image": "", "desc": "I have just completed my second year of University, now onto the last year! or hopefully a year in sweden :)", "date": "02/06/2023"}
+        { "id":"1", "uid":"1", "title":"Sweden", "image": "/img/Sweden.jpeg", "desc": "Currently I am in Sweden enjoying an exchange year!!! Meeting loads of new friends!", "date": "19/08/2023"},
+        { "id":"2", "uid":"1", "title":"Second Year Uni", "image": "/img/Portsmouth.jpeg", "desc": "I have just completed my second year of University, now onto the last year! or hopefully a year in sweden :)", "date": "02/06/2023"},
+        { "id":"3", "uid":"1", "title":"Completing Project", "image": "/img/Coding.jpeg", "desc": "Me and our team has completed our group project, was not fully done but everything is now completed", "date": "30/05/2023"}
       ]
       // inserts blogs
       blogs.forEach( (oneBlogs) => {
@@ -121,6 +122,7 @@ app.get('/blogs', function(req,res){
   db.all("SELECT * FROM blogs", function (error, theBlogs){
     if (error) {
       const model = {
+        style: "blogs.css",
         hasDatabaseError: true,
         theError: error,
         blogs: [],
@@ -132,6 +134,7 @@ app.get('/blogs', function(req,res){
     }
     else {
       const model = {
+        style: "blogs.css",
         hasDatabaseError: false,
         theError: "",
         blogs: theBlogs,
