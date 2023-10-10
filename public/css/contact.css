@@ -7,56 +7,89 @@
 }
 
 body {
-    background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(245,220,8,1) 0%, rgba(251,89,121,1) 100%);
+
+    background: #2b2203;
 }
 
-/* ------------------------------- */
-/*     THIS IS FOR THE CONTACT     */
-/* ------------------------------- */
-
-/* Style inputs */
-input[type=text], select, textarea {
+.main {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    margin-top: 6px;
-    margin-bottom: 16px;
-    resize: vertical;
-}
-  
-input[type=submit] {
-background-color: #04AA6D;
-color: white;
-padding: 12px 20px;
-border: none;
-cursor: pointer;
+    height: 80vh;
+    display: grid;
+    align-items: center;
 }
 
-input[type=submit]:hover {
-background-color: #45a049;
+.contact-in {
+    width: 80%;
+    height: auto;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    border-radius: 10px;
+    background: #edba12;
+    box-shadow: 0px 0px 10px 0px #666;
 }
 
-/* Style the container/contact section */
-.container {
-border-radius: 5px;
-background-color: #f2f2f2;
-padding: 10px;
+.contact-map {
+    width: 100%;
+    height: auto;
+    flex: 50%;
 }
 
-/* Create two columns that float next to eachother */
-.column {
-float: left;
-width: 50%;
-margin-top: 6px;
-padding: 20px;
+.contact-map iframe {
+    width: 100%;
+    height: 100%;
 }
 
-/* Clear floats after the columns */
-.row:after {
-content: "";
-display: table;
-clear: both;
+.contact-form {
+    width: 100%;
+    height: auto;
+    flex: 50%;
+    padding: 30px;
+    text-align: center;
+}
+
+.contact-form h1 {
+    margin-bottom: 10px;
+    color: #fcf2d4;
+}
+
+.contact-form-txt {
+    width: 100%;
+    height: 40px;
+    color: #000;
+    border: 1px solid #bcbcbc;
+    border-radius: 10px;
+    outline: none;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+.contact-form-txtarea {
+    width: 100%;
+    height: 130px;
+    color: #000;
+    border: 1px solid #bcbcbc;
+    border-radius: 10px;
+    outline: none;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+.btn {
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    background: #a17e0c;
+    color: #fff;
+    padding: 10px 0;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.btn:hover {
+    background: #2b2203;
 }
 
 /* ------------------------------- */
@@ -65,13 +98,13 @@ clear: both;
 
 .navbar {
     font-family: 'Times New Roman', Times, serif;
-    background:#0082e6 ;
+    background:#a17e0c ;
     height: 110px;
     width: 100%;
 }
 
 label.logo {
-    color: white;
+    color: #fcf2d4;
     font-size: 35px;
     line-height: 110px;
     padding: 0 100px;
@@ -90,7 +123,7 @@ label.logo {
 }
 
 .navbar ul li a {
-    color: white;
+    color: #fcf2d4;
     font-size: 20px;
     padding: 7px 13px;
     border-radius: 3px;
@@ -99,7 +132,7 @@ label.logo {
 }
 
 .navbar a:hover{
-    background: #1b9bff;
+    background: #edba12;
     transition: .5s;
 } 
 
@@ -113,11 +146,11 @@ footer {
     padding: 8px;
     list-style-type: none;
     overflow: hidden;
-    background-color: #777;
+    background-color: #edba12;
     color: white;
     height: 80px;
     width: 100vw;
-    margin-top: 200px;
+    margin-top: 50px;
 }
 
 footer div {

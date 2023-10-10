@@ -10,8 +10,7 @@
 /*            HOME PAGE            */
 /* ------------------------------- */
 body {
-    background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(245,220,8,1) 0%, rgba(251,89,121,1) 100%);
+    background: #2b2203;
 }
 
 #left {
@@ -19,13 +18,28 @@ body {
 }
 
 div h1 {
-    color: white;
+    color: #fcf2d4;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 div h2 {
-    color: white;
+    color: #fcf2d4;
     font-family: Arial, Helvetica, sans-serif;
+}
+div ul li {
+    color: #fcf2d4;
+}
+
+header p {
+    color: #fcf2d4;
+}
+
+div label {
+    color: #fcf2d4;
+}
+
+div p {
+    color: #fcf2d4;
 }
 
 img {
@@ -40,8 +54,8 @@ img {
     padding-left: 5px;
 }
 
-li {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.accordion-body h2 {
+    color: #fcf2d4;
 }
 
 /* ------------------------------- */
@@ -50,13 +64,13 @@ li {
 
 .navbar {
     font-family: 'Times New Roman', Times, serif;
-    background:#0082e6 ;
+    background:#a17e0c ;
     height: 110px;
     width: 100%;
 }
 
 label.logo {
-    color: white;
+    color: #fcf2d4;
     font-size: 35px;
     line-height: 110px;
     padding: 0 100px;
@@ -75,7 +89,7 @@ label.logo {
 }
 
 .navbar ul li a {
-    color: white;
+    color: #fcf2d4;
     font-size: 20px;
     padding: 7px 13px;
     border-radius: 3px;
@@ -84,7 +98,7 @@ label.logo {
 }
 
 .navbar a:hover{
-    background: #1b9bff;
+    background: #edba12;
     transition: .5s;
 } 
 
@@ -98,11 +112,11 @@ footer {
     padding: 8px;
     list-style-type: none;
     overflow: hidden;
-    background-color: #777;
+    background-color: #edba12;
     color: white;
     height: 80px;
     width: 100vw;
-    margin-top: 200px;
+    margin-top: 50px;
 }
 
 footer div {
