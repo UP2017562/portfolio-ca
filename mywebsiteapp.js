@@ -61,6 +61,7 @@ app.use(session({
 //-------------------------------
 
 const db = new sqlite3.Database('portfolio-ca3.db')
+
 db.run("CREATE TABLE user (user_id INTEGER PRIMARY KEY, user_name TEXT NOT NULL, pass_word TEXT NOT NULL, first_name TEXT NOT NULL, last_name TEXT NOT NULL)", (error) => {
 	if (error) {
       // tests error: display error
@@ -111,15 +112,48 @@ db.run("CREATE TABLE blogs (blogs_id INTEGER PRIMARY KEY, blogs_uid INTEGER, blo
     }
   })
 
+//-------------------------------
+//  BLOGS
+//-------------------------------
+
+// defines route "/blogs"
+app.get('/blogs', function(req,res){
+  db.all("SELECT * FROM blogs", function (error, theBlogs){
+    if (error) {
+      const model = {
+        hasDatabaseError: true,
+        theError: error,
+        blogs: [],
+        isLoggedIn: req.session.isLoggedIn,
+        name: req.session.name,
+        isAdmin: req.session.isAdmin
+      }
+      res.render("blogs.handlebars", model)
+    }
+    else {
+      const model = {
+        hasDatabaseError: false,
+        theError: "",
+        blogs: theBlogs,
+        isLoggedIn: req.session.isLoggedIn,
+        name: req.session.name,
+        isAdmin: req.session.isAdmin
+      }
+      res.render("blogs.handlebars", model)
+    }
+  })
+})
 
 //-------------------------------
 //  LOG IN APP
 //-------------------------------
+
 app.get('/login', (req, res) => {
     const model={
-        isLoggedIn: req.session.isLoggedIn,
-        name: req.session.name,
-        isAdmin: req.session.isAdmin
+      style: "login.css",
+      isLoggedIn: req.session.isLoggedIn,
+      name: req.session.name,
+      isAdmin: req.session.isAdmin
     }
     res.render('login.handlebars', model)
   });
@@ -162,6 +196,7 @@ app.get('/login', (req, res) => {
 app.get('/', (req, res) => {
     console.log("SESSION: ", req.session)
     const model={
+      style: "home.css",
       isLoggedIn: req.session.isLoggedIn,
       name: req.session.name,
       isAdmin: req.session.isAdmin
@@ -172,6 +207,7 @@ app.get('/', (req, res) => {
 
 app.get('/blogs', (req, res) => {
     const model={
+        style: "blogs.css",
         isLoggedIn: req.session.isLoggedIn,
         name: req.session.name,
         isAdmin: req.session.isAdmin
@@ -181,6 +217,7 @@ app.get('/blogs', (req, res) => {
 
 app.get('/contact', (req, res) => {
     const model={
+      style: "contact.css",
         isLoggedIn: req.session.isLoggedIn,
         name: req.session.name,
         isAdmin: req.session.isAdmin

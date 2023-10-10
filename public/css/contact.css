@@ -1,0 +1,126 @@
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+body {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(245,220,8,1) 0%, rgba(251,89,121,1) 100%);
+}
+
+/* ------------------------------- */
+/*     THIS IS FOR THE CONTACT     */
+/* ------------------------------- */
+
+/* Style inputs */
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+  
+input[type=submit] {
+background-color: #04AA6D;
+color: white;
+padding: 12px 20px;
+border: none;
+cursor: pointer;
+}
+
+input[type=submit]:hover {
+background-color: #45a049;
+}
+
+/* Style the container/contact section */
+.container {
+border-radius: 5px;
+background-color: #f2f2f2;
+padding: 10px;
+}
+
+/* Create two columns that float next to eachother */
+.column {
+float: left;
+width: 50%;
+margin-top: 6px;
+padding: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+content: "";
+display: table;
+clear: both;
+}
+
+/* ------------------------------- */
+/* THIS IS FOR THE MENU NAVIGATION */
+/* ------------------------------- */
+
+.navbar {
+    font-family: 'Times New Roman', Times, serif;
+    background:#0082e6 ;
+    height: 110px;
+    width: 100%;
+}
+
+label.logo {
+    color: white;
+    font-size: 35px;
+    line-height: 110px;
+    padding: 0 100px;
+    font-weight: bold;
+}
+
+.navbar ul {
+    float: right;
+    margin-right: 20px;
+}
+
+.navbar ul li {
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 5px;
+}
+
+.navbar ul li a {
+    color: white;
+    font-size: 20px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.navbar a:hover{
+    background: #1b9bff;
+    transition: .5s;
+} 
+
+/* ------------------------------- */
+/*      THIS IS FOR THE FOOTER     */
+/* ------------------------------- */
+
+footer {
+    /* position: absolute; */
+    bottom: 0;
+    padding: 8px;
+    list-style-type: none;
+    overflow: hidden;
+    background-color: #777;
+    color: white;
+    height: 80px;
+    width: 100vw;
+    margin-top: 200px;
+}
+
+footer div {
+    text-align: center;
+    padding-top: 8px;
+}

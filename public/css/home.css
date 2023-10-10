@@ -1,0 +1,111 @@
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+/* ------------------------------- */
+/*            HOME PAGE            */
+/* ------------------------------- */
+body {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(245,220,8,1) 0%, rgba(251,89,121,1) 100%);
+}
+
+#left {
+    align-content: center;
+}
+
+div h1 {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div h2 {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+img {
+    border-radius: 60%;
+}
+
+.accordion-body {
+    border-style: solid;
+    border-color: white;
+    border-width: 5px;
+    margin-bottom: 5px;
+    padding-left: 5px;
+}
+
+li {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ------------------------------- */
+/* THIS IS FOR THE MENU NAVIGATION */
+/* ------------------------------- */
+
+.navbar {
+    font-family: 'Times New Roman', Times, serif;
+    background:#0082e6 ;
+    height: 110px;
+    width: 100%;
+}
+
+label.logo {
+    color: white;
+    font-size: 35px;
+    line-height: 110px;
+    padding: 0 100px;
+    font-weight: bold;
+}
+
+.navbar ul {
+    float: right;
+    margin-right: 20px;
+}
+
+.navbar ul li {
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 5px;
+}
+
+.navbar ul li a {
+    color: white;
+    font-size: 20px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.navbar a:hover{
+    background: #1b9bff;
+    transition: .5s;
+} 
+
+/* ------------------------------- */
+/*      THIS IS FOR THE FOOTER     */
+/* ------------------------------- */
+
+footer {
+    /* position: absolute; */
+    bottom: 0;
+    padding: 8px;
+    list-style-type: none;
+    overflow: hidden;
+    background-color: #777;
+    color: white;
+    height: 80px;
+    width: 100vw;
+    margin-top: 200px;
+}
+
+footer div {
+    text-align: center;
+    padding-top: 8px;
+}

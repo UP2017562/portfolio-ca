@@ -1,0 +1,40 @@
+<div id="main">
+    <div class="container">
+        <h1>My Blogs</h1>
+
+        {{#if isAdmin}}
+            <div>
+                <a href="/blogs/new" class="btn btn-link"> New Blogs </a>
+            </div>
+        {{/if}}
+        <div class="columns col-gapless">
+            {{#if dbError}}
+                <div>
+                    Sorry, there was a problem with the database:<br />
+                    {{theError}}
+                </div>    
+            {{else}}
+                {{#each blogs}}
+                    <div class="column col-4 col-md-6 col-sm-12">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="{{blog_image}}" alt="{{blog_image}}" class="img-responsive">
+                            </div>
+                            <div class="card-header">
+                                <div class="card-title h3">{{blog_title}}</div>
+                                <div class="card-subtitle text-gray">{{blog_desc}} -- {{blog_date}}</div>                            
+                            </div>
+                            <div class="card-footer">
+                                {{#if ../isAdmin}}
+                                <div>
+                                    <a href="/blogs/update/{{pid}}"> Modify </a> - <a href="/projects/delete/{{pid}}" class="important"> Delete </a>
+                                </div>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            {{/if}}
+        </div>
+    </div>
+</div>
