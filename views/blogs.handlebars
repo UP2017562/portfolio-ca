@@ -4,6 +4,13 @@
         <span>My Recent posts</span>
         <h3>My Blogs</h3>
     </div> 
+
+     {{#if isAdmin}}
+        <div>
+            <a href="/blogs/new" class="btn btn-link"> New Blog </a>
+        </div>
+    {{/if}}
+
     <div class="blog-container">
         {{#if dbError}}
             <div>
@@ -21,6 +28,11 @@
                     <span>{{blog_date}}</span>
                     <a class="blog-title">{{blog_title}}</a>
                     <p>{{blog_desc}}</p>
+                     {{#if ../isAdmin}}
+                        <div>
+                            <a href="/blogs/update/{{blogs_id}}"> Modify </a> - <a href="/blogs/delete/{{blogs_id}}" class="important"> Delete </a>
+                        </div>
+                    {{/if}}
                 </div>
             </div>
             

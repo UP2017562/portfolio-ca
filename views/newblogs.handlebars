@@ -1,0 +1,37 @@
+<div id="main">
+    <div>
+        <h1>New Project</h1>
+        </div>
+            {{#if isLoggedIn}}
+                {{#if isAdmin}}
+                    <form action="/blogs/new" method="post">
+                        <fieldset>
+                            <label for="blogtitle">Blog Title: </label>
+                            <input type="text" name="blogtitle" id="blogtitle" required="required">
+                            <br />
+                            <label for="blogdate">Blog Date: </label>
+                            <input type="text" name="blogdate" id="blogdate" placeholder="01/01/2023" required="required">
+                            <br />
+                            <textarea name="blogdesc" id="blogdesc" cols="30" rows="10" required="required"></textarea>
+                            <br />
+                            <label for="bloguser">User ID: </label>
+                            <input type="number" name="bloguser" id="bloguser" placeholder="1" required="required">
+                            <br />
+                            <label for="blogimg">Blog image URL: </label>
+                            <input type="text" name="blogimg" id="blogimg" placeholder="/img/" required="required">
+                            <br />
+                        </fieldset>
+                        <input type="submit" value="Add Blog">
+                    </form>
+                {{else}}
+                    <p>Sorry, you must be an administrator to add a new project!</p>
+                {{/if}}
+            {{else}}
+                <p>
+                    Sorry, you must be logged in to add a new project!<br />
+                    Please go to the <a href="/login">Login</a> page.
+                </p>
+            {{/if}}
+        </div>
+    </div>
+</div>
