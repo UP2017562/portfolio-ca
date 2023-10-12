@@ -243,19 +243,23 @@ app.post('/blogs/update/:id', (req, res) => {
 // DELETES A PROJECT
 //------------------
 
-app.get('/projects/delete/:id', (req, res) => {
+app.get('/blogs/delete/:id', (req, res) => {
   const id = req.params.id
   if (req.session.isLoggedIn==true && req.session.isAdmin==true) {
-    db.run("DELETE FROM projects WHERE pid=?", [id], function (error, theProjects){
+    db.run("DELETE FROM blogs WHERE blogs_id=?", [id], function (error, theBlogs){
       if (error) {
-        const model = { dbError: true, theError: error,
+        const model = { 
+          style: "home.css",
+          dbError: true, theError: error,
           isLoggedIn: req.session.isLoggedIn,
           name: req.session.name,
           isAdmin: req.session.isAdmin,
         }
         res.render("home.handlebars", model)
       } else {
-        const model = { dbError: false, theError: "",
+        const model = { 
+          style: "home.css",
+          dbError: false, theError: "",
           isLoggedIn: req.session.isLoggedIn,
           name: req.session.name,
           isAdmin: req.session.isAdmin,
