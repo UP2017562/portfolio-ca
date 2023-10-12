@@ -192,46 +192,47 @@ app.post('/blogs/new', (req, res) => {
 //SENDS TEH FORM TO MODIFY A PROJECT
 app.get('/blogs/update/:id', (req, res) => {
   const id = req.params.id
-  db.get("SELECT * FROM projects WHERE pid=?", [id], function (error, theProject) {
+  db.get("SELECT * FROM blogs WHERE blogs_id=?", [id], function (error, theBlogs) {
     if (error) {
       console.log("ERROR: ", error)
-      const model = { dbError: true, theError: error,
-        project: {},
+      const model = { 
+        dbError: true, 
+        theError: error,
+        style: "blogs.css",
+        blogs: {},
         isLoggedIn: req.session.isLoggedIn,
         name: req.session.name,
         isAdmin: req.session.isAdmin,
       }
-      res.render("modifyproject.handlebars", model)
+      res.render("modify.handlebars", model)
     } else {
-      const model = { dbError: false, theError: "",
-        project: theProject,
+      const model = {
+        style: "blogs.css", 
+        dbError: false, 
+        theError: "",
+        blogs: theBlogs,
         isLoggedIn: req.session.isLoggedIn,
         name: req.session.name,
-        isAdmin: req.session.isAdmin,
-        helpers: {
-          theTypeR(value) { return value == "Research"; },
-          theTypeT(value) { return value == "Teaching"; },
-          theTypeO(value) { return value == "Other"; },
-        }
+        isAdmin: req.session.isAdmin
       }
-      res.render("modifyproject.handlebars", model)
+      res.render("modify.handlebars", model)
     }
   })
 })
 
-app.post('/projects/update/:id', (req, res) => {
+app.post('/blogs/update/:id', (req, res) => {
   const id = req.params.id // gets the id from the dynamic parameter in the route
   const newp = [
-    req.body.projname, req.body.projyear, req.body.projdesc, req.body.projtype, req.body.projimg, id
+    req.body.blogtitle, req.body.blogdate, req.body.blogdesc, req.body.bloguser, req.body.blogimg, id
   ]
   if (req.session.isLoggedIn==true && req.session.isAdmin==true) {
-    db.run("UPDATE projects SET pname=?, pyear=?, pdesc=?, ptype=?, pimgURL=? WHERE pid=?", newp, (error) => {
+    db.run("UPDATE blogs SET blog_title=?, blog_date=?, blog_desc=?, blogs_uid=?, blog_image=? WHERE blogs_id=?", newp, (error) => {
       if (error) {
         console.log("ERROR: ", error)
       } else {
-        console.log("Project Updated!")
+        console.log("Blog Updated!")
       }
-      res.redirect('/projects')
+      res.redirect('/blogs')
     })
   } else {
     res.redirect('/login')
