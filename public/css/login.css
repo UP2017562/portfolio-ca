@@ -31,7 +31,7 @@ body {
     background: transparent;
     backdrop-filter: blur(20px);
     border: 2px solid white;
-    color: #03081c;
+    color: white;
     border-radius: 10px;
     padding: 30px 40px;
 }
@@ -110,7 +110,7 @@ body {
 }
 
 label.logo {
-    color: #03081c;;
+    color: white;;
     font-size: 35px;
     line-height: 110px;
     padding: 0 100px;
@@ -129,7 +129,7 @@ label.logo {
 }
 
 .navbar ul li a {
-    color: #03081c;
+    color: white;
     font-size: 20px;
     padding: 7px 13px;
     border-radius: 3px;

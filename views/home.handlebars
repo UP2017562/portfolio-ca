@@ -30,7 +30,7 @@
             <div class="blog-text">
                 <span></span>
                 <a class="blog-title">Information</a>
-                <p>Email: caal23tw@student.ju.se <br/>Phone: 0707070707 <br/>LinkedIn: linkedin.com/in/</p>
+                <p>Email: caal23tw@student.ju.se <br/>Phone: 0707070707 <br/>Address: Kärrhöksgatan 100</p>
             </div>
         </div>
 
@@ -42,11 +42,15 @@
             <div class="blog-text">
                 <span></span>
                 <a class="blog-title">Education</a>
-                <p></p>
+                <p>2020-2025 - University of Portsmouth
+                    2023-2024 - Jonkoping University
+                    2018-2020 - Havant South Downs C
+                    2013-2018 - Oaklands Catholic School
+                </p>
             </div>
         </div>
 
-         <div class="blog-box">
+        <div class="blog-box">
             <div class="blog-img">
                 <img src="/img/workicon.png" alt="blog">
             </div>
@@ -54,9 +58,26 @@
             <div class="blog-text">
                 <span></span>
                 <a class="blog-title">Work Experience</a>
-                <p></p>
+                <p>2018 - 1 week: SSE ENERGY </br>
+                    2019 - 1 week: SSE ENERGY <br>
+                    2019-2023 Morrisons
+                </p>
             </div>
         </div>
+
+        {{#if isAdmin}}
+        <div class="blog-box">
+            <a href="/home/new">
+                <div class="blog-img">
+                    <img src="/img/plusicon.png" alt="blog">
+                </div>
+            </a>
+
+            <div class="blog-text">
+                <a class="blog-title-new" href="/home/new">Add a new CV</a>
+            </div>
+        </div>
+        {{/if}}
 
     </div>
 </section>

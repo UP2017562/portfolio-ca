@@ -7,8 +7,7 @@
 }
 
 body {
-
-    background: #2b2203;
+    background: #e8ecfd;
 }
 
 .main {
@@ -26,7 +25,7 @@ body {
     flex-wrap: wrap;
     padding: 10px;
     border-radius: 10px;
-    background: #edba12;
+    background: transparent;
     box-shadow: 0px 0px 10px 0px #666;
 }
 
@@ -51,7 +50,7 @@ body {
 
 .contact-form h1 {
     margin-bottom: 10px;
-    color: #fcf2d4;
+    color: black;
 }
 
 .contact-form-txt {
@@ -81,7 +80,7 @@ body {
     border: none;
     outline: none;
     border-radius: 50px;
-    background: #a17e0c;
+    background: #4139ea;
     color: #fff;
     padding: 10px 0;
     cursor: pointer;
@@ -89,7 +88,7 @@ body {
 }
 
 .btn:hover {
-    background: #2b2203;
+    background: black;
 }
 
 /* ------------------------------- */
@@ -98,13 +97,13 @@ body {
 
 .navbar {
     font-family: 'Times New Roman', Times, serif;
-    background:#a17e0c ;
+    background:#4139ea ;
     height: 110px;
     width: 100%;
 }
 
 label.logo {
-    color: #fcf2d4;
+    color: #e8ecfd;;
     font-size: 35px;
     line-height: 110px;
     padding: 0 100px;
@@ -123,7 +122,7 @@ label.logo {
 }
 
 .navbar ul li a {
-    color: #fcf2d4;
+    color: #e8ecfd;
     font-size: 20px;
     padding: 7px 13px;
     border-radius: 3px;
@@ -132,9 +131,10 @@ label.logo {
 }
 
 .navbar a:hover{
-    background: #edba12;
+    background: #9b14bd;
     transition: .5s;
 } 
+
 
 /* ------------------------------- */
 /*      THIS IS FOR THE FOOTER     */
@@ -146,11 +146,10 @@ footer {
     padding: 8px;
     list-style-type: none;
     overflow: hidden;
-    background-color: #edba12;
-    color: white;
+    background-color: #e6a7f6;
+    color: #03081c;;
     height: 80px;
     width: 100vw;
-    margin-top: 50px;
 }
 
 footer div {

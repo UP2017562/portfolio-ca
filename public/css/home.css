@@ -17,12 +17,12 @@ body {
 .container {
     max-width: 90%;
     margin: 0 auto;
-    background-color: #e8ecfd;
+    background-color: #e8ecfd; 
 }
 
 .section {
-    margin: 20px;
-    padding: 20px;
+    margin: 20px 20px 0px 20px;
+    padding: 20px 20px 0px 20px;
     background-color: #fff;
     border: 1px solid #e0e0e0;
     border-radius: 5px;
@@ -126,6 +126,13 @@ ul {
     font-size: 1.3rem;
     font-weight: 500;
     color: #272727;
+}
+
+.blog-text .blog-title-new {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #272727;
+    text-align: center;
 }
 
 .blog-text p {
