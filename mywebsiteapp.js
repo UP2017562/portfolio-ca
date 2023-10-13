@@ -113,6 +113,31 @@ db.run("CREATE TABLE blogs (blogs_id INTEGER PRIMARY KEY, blogs_uid INTEGER, blo
     }
   })
 
+db.run("CREATE TABLE submit (submit_id INTEGER PRIMARY KEY, submit_name TEXT, submit_email TEXT, submit_desc TEXT)", (error) => {
+  if (error) {
+      // tests error: display error
+      console.log("ERROR: ", error)
+    } else {
+      // tests error: no error, the table has been created
+      console.log("---> Table submit created!")
+  
+      const submit=[
+        { "id":"1", "name":"Steven", "email":"steven.cool@gmail.com", "desc": "Hey, i am interested, can you please contact me when you are free!!"},
+        { "id":"2", "name":"Goerge", "email":"george.cool2@gmail.com", "desc": "Hey i wanted to say i love your website and your blogs"}
+      ]
+      // inserts blogs
+      submit.forEach( (oneSubmit) => {
+        db.run("INSERT INTO submit (submit_id, submit_name, submit_email, submit_desc) VALUES (?, ?, ?, ?)", [oneSubmit.id, oneSubmit.name, oneSubmit.email, oneSubmit.desc], (error) => {
+          if (error) {
+            console.log("ERROR: ", error)
+          } else {
+            console.log("Line added into the submit table!")
+          }
+        })
+      })
+    }
+  })
+
 //-------------------------------
 //  BLOGS
 //-------------------------------
@@ -272,6 +297,33 @@ app.get('/blogs/delete/:id', (req, res) => {
   }
 })
 
+//------------------
+// CONTACT SUBMIT
+//------------------
+app.get('/contact', (req, res) => {
+    const model={
+      style: "contact.css",
+        isLoggedIn: req.session.isLoggedIn,
+        name: req.session.name,
+        isAdmin: req.session.isAdmin
+      }
+    res.render('contact.handlebars', model)
+})
+
+
+app.post('/contact/new', (req, res) => {
+  const newp = [
+    req.body.contactname, req.body.contactemail, req.body.contactdesc
+  ]
+  db.run("INSERT INTO submit (submit_name, submit_email, submit_desc) VALUES (?, ?, ?)", newp, (error) => {
+    if (error) {
+      console.log("ERROR: ", error)
+    } else {
+      console.log("Line added into the Submit table!")
+    }
+    res.redirect('/')
+  })
+})
 
 //-------------------------------
 //  LOG IN APP
@@ -332,16 +384,6 @@ app.get('/', (req, res) => {
     }
     res.render('home.handlebars', model)
   })
-
-app.get('/contact', (req, res) => {
-    const model={
-      style: "contact.css",
-        isLoggedIn: req.session.isLoggedIn,
-        name: req.session.name,
-        isAdmin: req.session.isAdmin
-      }
-    res.render('contact.handlebars', model)
-})
 
 // run the server and make it listen to the port
 app.listen(port, () => {

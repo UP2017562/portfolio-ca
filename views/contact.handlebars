@@ -6,10 +6,10 @@
 
     <div class="contact-form">
       <h1>Contact Me!!</h1>
-      <form>
-        <input type="text" placeholder="Name" class="contact-form-txt"/>
-        <input type="text" placeholder="Email" class="contact-form-txt"/>
-        <textarea placeholder="Message" class="contact-form-txtarea"></textarea>
+      <form action="/contact/new" method="post">
+        <input type="text" placeholder="Name" name="contactname" id="contactname" class="contact-form-txt"/>
+        <input type="text" placeholder="Email" name="contactemail" id="contactemail" class="contact-form-txt"/>
+        <textarea placeholder="Message" name="contactdesc" id="contactdesc" class="contact-form-txtarea"></textarea>
         <button type="submit" class="btn">Submit</button>
       </form>
     </div>
