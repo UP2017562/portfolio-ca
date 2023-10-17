@@ -12,10 +12,13 @@
                 <li><a href="/contact"> Contact </a></li>
                 {{#if isLoggedIn}}
                     <li><a href="/logout"> Logout </a></li>
+                {{#if isAdmin}}
                     <li class="admin">ADMIN</li>
+                {{/if}}
                 {{else}}
                     <li><a href="/login"> Login </a></li>
                 {{/if}}
+                
             </ul>
         </div>
     </nav>

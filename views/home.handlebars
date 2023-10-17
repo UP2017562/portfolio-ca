@@ -14,56 +14,37 @@
             Summary
         </div>
         <div class="section-content">
-            <p>A brief summary of your background, skills, and career objectives.</p>
+            <p>This is my CV which consists of my skills, Information, education, qualifications and work Experience.</p>
         </div>
     </div>
 </div>
 
 <section id="blog">
     <div class="blog-container">  
-
+        {{#if dbError}}
+            <div>
+                Sorry, there was a problem with the database:<br />
+                {{theError}}
+            </div>   
+        {{else}}
+        {{#each cv}}
         <div class="blog-box">
             <div class="blog-img">
-                <img src="/img/infoicon.png" alt="blog">
+                <img src="{{cv_image}}" alt="icon">
             </div>
 
             <div class="blog-text">
-                <span></span>
-                <a class="blog-title">Information</a>
-                <p>Email: caal23tw@student.ju.se <br/>Phone: 0707070707 <br/>Address: Kärrhöksgatan 100</p>
+                <a class="blog-title">{{cv_title}}</a>
+                <p>{{cv_desc}}</p>
+                {{#if ../isAdmin}}
+                    <div>
+                        <a href="/home/update/{{cv_id}}"> Modify </a> - <a href="/home/delete/{{cv_id}}" class="important"> Delete </a>
+                    </div>
+                {{/if}}
             </div>
         </div>
-
-        <div class="blog-box">
-            <div class="blog-img">
-                <img src="/img/eduicon.png" alt="blog">
-            </div>
-
-            <div class="blog-text">
-                <span></span>
-                <a class="blog-title">Education</a>
-                <p>2020-2025 - University of Portsmouth
-                    2023-2024 - Jonkoping University
-                    2018-2020 - Havant South Downs C
-                    2013-2018 - Oaklands Catholic School
-                </p>
-            </div>
-        </div>
-
-        <div class="blog-box">
-            <div class="blog-img">
-                <img src="/img/workicon.png" alt="blog">
-            </div>
-
-            <div class="blog-text">
-                <span></span>
-                <a class="blog-title">Work Experience</a>
-                <p>2018 - 1 week: SSE ENERGY </br>
-                    2019 - 1 week: SSE ENERGY <br>
-                    2019-2023 Morrisons
-                </p>
-            </div>
-        </div>
+        {{/each}}
+        {{/if}}
 
         {{#if isAdmin}}
         <div class="blog-box">

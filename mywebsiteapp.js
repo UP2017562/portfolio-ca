@@ -87,6 +87,32 @@ db.run("CREATE TABLE user (user_id INTEGER PRIMARY KEY, user_name TEXT NOT NULL,
     }
   })
 
+db.run("CREATE TABLE cv (cv_id INTEGER PRIMARY KEY, cv_title TEXT, cv_image TEXT, cv_desc TEXT)", (error) => {
+  if (error) {
+      // tests error: display error
+      console.log("ERROR: ", error)
+    } else {
+      // tests error: no error, the table has been created
+      console.log("---> Table cv created!")
+  
+      const cv=[
+        { "id":"1", "title":"Information", "image": "/img/infoicon.png", "desc": "Email: caal23tw@student.ju.se <br/>Phone: 0707070707 <br/>Address: Kärrhöksgatan 100"},
+        { "id":"2", "title":"Education", "image": "/img/eduicon.png", "desc": "2020-2025 - University of Portsmouth <br/>2023-2024 - Jonkoping University <br/>2018-2020 - Havant South Downs College <br/>2013-2018 - Oaklands Catholic School"},
+        { "id":"3", "title":"Work Experience", "image": "/img/workicon.png", "desc": "2018 - 1 week: SSE ENERGY </br>2019 - 1 week: SSE ENERGY <br>2019-2023 Morrisons"},
+      ]
+      // inserts blogs
+      cv.forEach( (oneCV) => {
+        db.run("INSERT INTO cv (cv_id, cv_title, cv_image, cv_desc) VALUES (?, ?, ?, ?)", [oneCV.id, oneCV.title, oneCV.image, oneCV.desc], (error) => {
+          if (error) {
+            console.log("ERROR: ", error)
+          } else {
+            console.log("Line added into the cv table!")
+          }
+        })
+      })
+    }
+  })
+
 db.run("CREATE TABLE blogs (blogs_id INTEGER PRIMARY KEY, blogs_uid INTEGER, blog_title TEXT, blog_image TEXT, blog_desc TEXT, blog_date TEXT, FOREIGN KEY (blogs_uid) REFERENCES user (user_id))", (error) => {
 	if (error) {
       // tests error: display error
@@ -137,6 +163,166 @@ db.run("CREATE TABLE submit (submit_id INTEGER PRIMARY KEY, submit_name TEXT, su
       })
     }
   })
+
+//-------------------------------
+//  HOME CV
+//-------------------------------
+// defines route "/home"
+app.get('/', function(req,res){
+  db.all("SELECT * FROM cv", function (error, theCVs){
+    if (error) {
+      const model = {
+        style: "home.css",
+        hasDatabaseError: true,
+        theError: error,
+        cv: [],
+        isLoggedIn: req.session.isLoggedIn,
+        name: req.session.name,
+        isAdmin: req.session.isAdmin
+      }
+      res.render("home.handlebars", model)
+    }
+    else {
+      const model = {
+        style: "home.css",
+        hasDatabaseError: false,
+        theError: "",
+        cv: theCVs,
+        isLoggedIn: req.session.isLoggedIn,
+        name: req.session.name,
+        isAdmin: req.session.isAdmin
+      }
+      res.render("home.handlebars", model)
+    }
+  })
+})
+
+//--------------------
+// CREATES NEW CV
+//--------------------
+
+// SENDS THE FORM FOR A NEW PROJECT
+app.get('/home/new', (req, res) => {
+  if (req.session.isLoggedIn==true && req.session.isAdmin==true) {
+    const model = {
+      style: "blogs.css",
+      isLoggedIn: req.session.isLoggedIn,
+      name: req.session.name,
+      isAdmin: req.session.isAdmin,
+    }
+    res.render("newcv.handlebars", model)
+  } else {
+    res.redirect('/login')
+  }
+})
+
+// CREATES NEW PROJECT
+app.post('/home/new', (req, res) => {
+  const newp = [
+    req.body.cvtitle, req.body.cvimage, req.body.cvdesc,
+  ]
+  if (req.session.isLoggedIn==true && req.session.isAdmin==true) {
+    db.run("INSERT INTO cv (cv_title, cv_image, cv_desc) VALUES (?, ?, ?)", newp, (error) => {
+      if (error) {
+        console.log("ERROR: ", error)
+      } else {
+        console.log("Line added into the CV table!")
+      }
+      res.redirect('/')
+    })
+  } else {
+    res.redirect('/login')
+  }
+})
+
+//-----------------
+// MODIFY A CV
+//-----------------
+
+//SENDS TEH FORM TO MODIFY A PROJECT
+app.get('/home/update/:id', (req, res) => {
+  const id = req.params.id
+  db.get("SELECT * FROM cv WHERE cv_id=?", [id], function (error, theCVs) {
+    if (error) {
+      console.log("ERROR: ", error)
+      const model = { 
+        dbError: true, 
+        theError: error,
+        style: "blogs.css",
+        cv: {},
+        isLoggedIn: req.session.isLoggedIn,
+        name: req.session.name,
+        isAdmin: req.session.isAdmin,
+      }
+      res.render("modifyhome.handlebars", model)
+    } else {
+      const model = {
+        style: "blogs.css", 
+        dbError: false, 
+        theError: "",
+        cv: theCVs,
+        isLoggedIn: req.session.isLoggedIn,
+        name: req.session.name,
+        isAdmin: req.session.isAdmin
+      }
+      res.render("modifyhome.handlebars", model)
+    }
+  })
+})
+
+app.post('/home/update/:id', (req, res) => {
+  const id = req.params.id // gets the id from the dynamic parameter in the route
+  const newp = [
+    req.body.cvtitle, req.body.cvimage, req.body.cvdesc, id
+  ]
+  if (req.session.isLoggedIn==true && req.session.isAdmin==true) {
+    db.run("UPDATE cv SET cv_title=?, cv_image=?, cv_desc=? WHERE cv_id=?", newp, (error) => {
+      if (error) {
+        console.log("ERROR: ", error)
+      } else {
+        console.log("CV Updated!")
+      }
+      res.redirect('/')
+    })
+  } else {
+    res.redirect('/login')
+  }
+})
+
+
+//------------------
+// DELETES A CV
+//------------------
+
+app.get('/home/delete/:id', (req, res) => {
+  const id = req.params.id
+  if (req.session.isLoggedIn==true && req.session.isAdmin==true) {
+    db.run("DELETE FROM cv WHERE cv_id=?", [id], function (error, theCVs){
+      if (error) {
+        const model = { 
+          style: "home.css",
+          dbError: true, theError: error,
+          isLoggedIn: req.session.isLoggedIn,
+          name: req.session.name,
+          isAdmin: req.session.isAdmin,
+        }
+        res.render("home.handlebars", model)
+      } else {
+        const model = { 
+          style: "home.css",
+          dbError: false, theError: "",
+          isLoggedIn: req.session.isLoggedIn,
+          name: req.session.name,
+          isAdmin: req.session.isAdmin,
+      }
+      res.render("home.handlebars", model)
+      }       
+    })
+  } else{
+    res.redirect('/login')
+  }
+  res.redirect('/')
+})
 
 //-------------------------------
 //  BLOGS
@@ -374,16 +560,16 @@ app.get('/login', (req, res) => {
   })
 
 // renders a view WITHOUT DATA
-app.get('/', (req, res) => {
-    console.log("SESSION: ", req.session)
-    const model={
-      style: "home.css",
-      isLoggedIn: req.session.isLoggedIn,
-      name: req.session.name,
-      isAdmin: req.session.isAdmin
-    }
-    res.render('home.handlebars', model)
-  })
+// app.get('/', (req, res) => {
+//     console.log("SESSION: ", req.session)
+//     const model={
+//       style: "home.css",
+//       isLoggedIn: req.session.isLoggedIn,
+//       name: req.session.name,
+//       isAdmin: req.session.isAdmin
+//     }
+//     res.render('home.handlebars', model)
+//   })
 
 // run the server and make it listen to the port
 app.listen(port, () => {

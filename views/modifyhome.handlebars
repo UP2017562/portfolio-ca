@@ -1,0 +1,32 @@
+<div id="main">
+    <div>
+        <h1>Modify CV</h1>
+        <div>
+            {{#if isLoggedIn}}
+                {{#if isAdmin}}
+                    <form action="/home/update/{{cv.cv_id}}" method="post">
+                       <fieldset>
+                            <label for="cvtitle">CV Title: </label>
+                            <input type="text" name="cvtitle" id="cvtitle" value="{{cv.cv_title}}" required="required">
+                            <br />
+                            <label for="cvimage">CV image URL: </label>
+                            <input type="text" name="cvimage" id="cvimage" value="{{cv.cv_image}}" required="required">
+                            <br />
+                            <label for="cvdesc">CV Description: </label>
+                            <textarea name="cvdesc" id="cvdesc" cols="30" rows="10" value="{{cv.cv_desc}}" required="required"></textarea>
+                            <br />
+                        </fieldset>
+                        <input type="submit" value="Update CV">
+                    </form>
+                {{else}}
+                    <p>Sorry, you must be an administrator to add a new CV!</p>
+                {{/if}}
+            {{else}}
+                <p>
+                    Sorry, you must be logged in to add a new CV! <br />
+                    Please go to the <a href="/login">Login</a> page.
+                </p>
+            {{/if}}
+        </div>
+    </div>
+</div>
