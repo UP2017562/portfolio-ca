@@ -1,32 +1,13 @@
-<div id="main">
-    <div>
-        <h1>New Project</h1>
-        </div>
-            {{#if isLoggedIn}}
-                {{#if isAdmin}}
-                    <form action="/home/new" method="post">
-                                               <fieldset>
-                            <label for="cvtitle">CV Title: </label>
-                            <input type="text" name="cvtitle" id="cvtitle" required="required">
-                            <br />
-                            <label for="cvimage">CV image URL: </label>
-                            <input type="text" name="cvimage" id="cvimage" required="required">
-                            <br />
-                            <label for="cvdesc">CV Description: </label>
-                            <textarea name="cvdesc" id="cvdesc" cols="30" rows="10" required="required"></textarea>
-                            <br />
-                        </fieldset>
-                        <input type="submit" value="Add CV">
-                    </form>
-                {{else}}
-                    <p>Sorry, you must be an administrator to add a new project!</p>
-                {{/if}}
-            {{else}}
-                <p>
-                    Sorry, you must be logged in to add a new project!<br />
-                    Please go to the <a href="/login">Login</a> page.
-                </p>
-            {{/if}}
-        </div>
+<div class="main">
+  <div class="contact-in">
+    <div class="contact-form">
+      <h1>Additional CV</h1>
+      <form action="/home/new" method="post">
+        <input type="text" placeholder="Title" name="cvtitle" id="cvtitle" class="contact-form-txt"/>
+        <input type="text" placeholder="Image URL" name="cvimage" id="cvimage" class="contact-form-txt"/>
+        <textarea placeholder="Description" name="cvdesc" id="cvdesc" class="contact-form-txtarea"></textarea>
+        <button type="submit" class="btn">Add</button>
+      </form>
     </div>
+  </div>
 </div>

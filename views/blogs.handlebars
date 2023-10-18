@@ -18,7 +18,7 @@
                 {{theError}}
             </div>   
         {{else}}
-        {{#each blogs}}
+        {{#each blog}}
             <div class="blog-box">
                 <div class="blog-img">
                     <img src="{{blog_image}}" alt="blog">
@@ -30,7 +30,7 @@
                     <p>{{blog_desc}}</p>
                      {{#if ../isAdmin}}
                         <div>
-                            <a href="/blogs/update/{{blogs_id}}"> Modify </a> - <a href="/blogs/delete/{{blogs_id}}" class="important"> Delete </a>
+                            <a href="/blogs/update/{{blog_id}}"> Modify </a> - <a href="/blogs/delete/{{blog_id}}" class="important"> Delete </a>
                         </div>
                     {{/if}}
                 </div>

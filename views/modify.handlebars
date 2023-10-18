@@ -1,27 +1,23 @@
-<div id="main">
-    <div>
-        <h1>Modify Blog</h1>
-        <div>
+<br/>
+<br/>
+<div class="main">
+    <div class="contact-in">
+        <div class="contact-form">
+            <h1>Modifying Blog!</h1>
             {{#if isLoggedIn}}
                 {{#if isAdmin}}
-                    <form action="/blogs/update/{{blogs.blogs_id}}" method="post">
+                    <form action="/blogs/update/{{blog.blog_id}}" method="post">
                        <fieldset>
                             <label for="blogtitle">Blog Title: </label>
-                            <input type="text" name="blogtitle" id="blogtitle" value="{{blogs.blog_title}}" required="required">
-                            <br />
+                            <input type="text" name="blogtitle" id="blogtitle" value="{{blog.blog_title}}" required="required" class="contact-form-txt">
                             <label for="blogdate">Blog Date: </label>
-                            <input type="text" name="blogdate" id="blogdate" value="{{blogs.blog_date}}" required="required">
-                            <br />
-                            <textarea name="blogdesc" id="blogdesc" cols="30" rows="10" value="{{blogs.blog_desc}}" required="required"></textarea>
-                            <br />
-                            <label for="bloguser">User ID: </label>
-                            <input type="number" name="bloguser" id="bloguser" value="{{blogs.blogs_uid}}" required="required">
-                            <br />
+                            <input type="text" name="blogdate" id="blogdate" value="{{blog.blog_date}}" required="required" class="contact-form-txt">
+                            <label for="blogdesc">Blog Description: </label>
+                            <textarea name="blogdesc" id="blogdesc" required="required" class="contact-form-txtarea">{{blog.blog_desc}}</textarea>
                             <label for="blogimg">Blog image URL: </label>
-                            <input type="text" name="blogimg" id="blogimg" value="{{blogs.blog_image}}" required="required">
-                            <br />
+                            <input type="text" name="blogimg" id="blogimg" value="{{blog.blog_image}}" required="required" class="contact-form-txt">
+                            <button type="submit" class="btn">Add</button>
                         </fieldset>
-                        <input type="submit" value="Add Blog">
                     </form>
                 {{else}}
                     <p>Sorry, you must be an administrator to add a new blog!</p>
@@ -35,3 +31,7 @@
         </div>
     </div>
 </div>
+<br/>
+<br/>
+<br/>
+<br/>

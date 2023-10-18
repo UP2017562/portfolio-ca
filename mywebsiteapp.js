@@ -28,15 +28,6 @@ app.use((req, res, next) => {
     next()
 })
 
-// app.get('/', (req, res) => {
-//     const model={
-//         isLoggedIn: req.session.isLoggedIn,
-//         name: req.session.name,
-//         isAdmin: req.session.isAdmin
-//       }
-//       res.render('home.handlebars', model)
-// })
-
 //------------
 // POST Forms
 //------------
@@ -115,22 +106,22 @@ db.run("CREATE TABLE cv (cv_id INTEGER PRIMARY KEY, cv_title TEXT, cv_image TEXT
     }
   })
 
-db.run("CREATE TABLE blogs (blogs_id INTEGER PRIMARY KEY, blogs_uid INTEGER, blog_title TEXT, blog_image TEXT, blog_desc TEXT, blog_date TEXT, FOREIGN KEY (blogs_uid) REFERENCES user (user_id))", (error) => {
+db.run("CREATE TABLE blog (blog_id INTEGER PRIMARY KEY, blog_uid INTEGER, blog_title TEXT, blog_image TEXT, blog_desc TEXT, blog_date TEXT, FOREIGN KEY (blog_uid) REFERENCES user (user_id))", (error) => {
 	if (error) {
       // tests error: display error
       console.log("ERROR: ", error)
     } else {
       // tests error: no error, the table has been created
-      console.log("---> Table blogs created!")
+      console.log("---> Table blog created!")
   
-      const blogs=[
+      const blog=[
         { "id":"1", "uid":"1", "title":"Sweden", "image": "/img/Sweden.jpeg", "desc": "Currently I am in Sweden enjoying an exchange year!!! Meeting loads of new friends!", "date": "19/08/2023"},
         { "id":"2", "uid":"1", "title":"Second Year Uni", "image": "/img/Portsmouth.jpeg", "desc": "I have just completed my second year of University, now onto the last year! or hopefully a year in sweden :)", "date": "02/06/2023"},
         { "id":"3", "uid":"1", "title":"Completing Project", "image": "/img/Coding.jpeg", "desc": "Me and our team has completed our group project, was not fully done but everything is now completed", "date": "30/05/2023"}
       ]
       // inserts blogs
-      blogs.forEach( (oneBlogs) => {
-        db.run("INSERT INTO blogs (blogs_id, blogs_uid, blog_title, blog_image, blog_desc, blog_date) VALUES (?, ?, ?, ?, ?, ?)", [oneBlogs.id, oneBlogs.uid, oneBlogs.title, oneBlogs.image, oneBlogs.desc, oneBlogs.date], (error) => {
+      blog.forEach( (oneBlog) => {
+        db.run("INSERT INTO blog (blog_id, blog_uid, blog_title, blog_image, blog_desc, blog_date) VALUES (?, ?, ?, ?, ?, ?)", [oneBlog.id, oneBlog.uid, oneBlog.title, oneBlog.image, oneBlog.desc, oneBlog.date], (error) => {
           if (error) {
             console.log("ERROR: ", error)
           } else {
@@ -241,7 +232,7 @@ app.get('/home/view/:id', (req, res) => {
 app.get('/home/new', (req, res) => {
   if (req.session.isLoggedIn==true && req.session.isAdmin==true) {
     const model = {
-      style: "blogs.css",
+      style: "new.css",
       isLoggedIn: req.session.isLoggedIn,
       name: req.session.name,
       isAdmin: req.session.isAdmin,
@@ -366,13 +357,13 @@ app.get('/home/delete/:id', (req, res) => {
 
 // defines route "/blogs"
 app.get('/blogs', function(req,res){
-  db.all("SELECT * FROM blogs", function (error, theBlogs){
+  db.all("SELECT * FROM blog", function (error, theBlogs){
     if (error) {
       const model = {
         style: "blogs.css",
         hasDatabaseError: true,
         theError: error,
-        blogs: [],
+        blog: [],
         isLoggedIn: req.session.isLoggedIn,
         name: req.session.name,
         isAdmin: req.session.isAdmin
@@ -384,7 +375,7 @@ app.get('/blogs', function(req,res){
         style: "blogs.css",
         hasDatabaseError: false,
         theError: "",
-        blogs: theBlogs,
+        blog: theBlogs,
         isLoggedIn: req.session.isLoggedIn,
         name: req.session.name,
         isAdmin: req.session.isAdmin
@@ -402,7 +393,7 @@ app.get('/blogs', function(req,res){
 app.get('/blogs/new', (req, res) => {
   if (req.session.isLoggedIn==true && req.session.isAdmin==true) {
     const model = {
-      style: "blogs.css",
+      style: "new.css",
       isLoggedIn: req.session.isLoggedIn,
       name: req.session.name,
       isAdmin: req.session.isAdmin,
@@ -413,17 +404,17 @@ app.get('/blogs/new', (req, res) => {
   }
 })
 
-// CREATES NEW PROJECT
+// CREATES NEW BLOG
 app.post('/blogs/new', (req, res) => {
   const newp = [
     req.body.blogtitle, req.body.blogdate, req.body.blogdesc, req.body.bloguser, req.body.blogimg,
   ]
   if (req.session.isLoggedIn==true && req.session.isAdmin==true) {
-    db.run("INSERT INTO blogs (blog_title, blog_date, blog_desc, blogs_uid, blog_image) VALUES (?, ?, ?, ?, ?)", newp, (error) => {
+    db.run("INSERT INTO blog (blog_title, blog_date, blog_desc, blog_uid, blog_image) VALUES (?, ?, ?, ?, ?)", newp, (error) => {
       if (error) {
         console.log("ERROR: ", error)
       } else {
-        console.log("Line added into the Blogs table!")
+        console.log("Line added into the Blog table!")
       }
       res.redirect('/blogs')
     })
@@ -439,14 +430,14 @@ app.post('/blogs/new', (req, res) => {
 //SENDS TEH FORM TO MODIFY A PROJECT
 app.get('/blogs/update/:id', (req, res) => {
   const id = req.params.id
-  db.get("SELECT * FROM blogs WHERE blogs_id=?", [id], function (error, theBlogs) {
+  db.get("SELECT * FROM blog WHERE blog_id=?", [id], function (error, theBlogs) {
     if (error) {
       console.log("ERROR: ", error)
       const model = { 
         dbError: true, 
         theError: error,
-        style: "blogs.css",
-        blogs: {},
+        style: "new.css",
+        blog: {},
         isLoggedIn: req.session.isLoggedIn,
         name: req.session.name,
         isAdmin: req.session.isAdmin,
@@ -454,10 +445,10 @@ app.get('/blogs/update/:id', (req, res) => {
       res.render("modify.handlebars", model)
     } else {
       const model = {
-        style: "blogs.css", 
+        style: "new.css", 
         dbError: false, 
         theError: "",
-        blogs: theBlogs,
+        blog: theBlogs,
         isLoggedIn: req.session.isLoggedIn,
         name: req.session.name,
         isAdmin: req.session.isAdmin
@@ -473,7 +464,7 @@ app.post('/blogs/update/:id', (req, res) => {
     req.body.blogtitle, req.body.blogdate, req.body.blogdesc, req.body.bloguser, req.body.blogimg, id
   ]
   if (req.session.isLoggedIn==true && req.session.isAdmin==true) {
-    db.run("UPDATE blogs SET blog_title=?, blog_date=?, blog_desc=?, blogs_uid=?, blog_image=? WHERE blogs_id=?", newp, (error) => {
+    db.run("UPDATE blog SET blog_title=?, blog_date=?, blog_desc=?, blog_uid=?, blog_image=? WHERE blog_id=?", newp, (error) => {
       if (error) {
         console.log("ERROR: ", error)
       } else {
@@ -493,7 +484,7 @@ app.post('/blogs/update/:id', (req, res) => {
 app.get('/blogs/delete/:id', (req, res) => {
   const id = req.params.id
   if (req.session.isLoggedIn==true && req.session.isAdmin==true) {
-    db.run("DELETE FROM blogs WHERE blogs_id=?", [id], function (error, theBlogs){
+    db.run("DELETE FROM blog WHERE blog_id=?", [id], function (error, theBlogs){
       if (error) {
         const model = { 
           style: "home.css",
@@ -517,6 +508,7 @@ app.get('/blogs/delete/:id', (req, res) => {
   } else{
     res.redirect('/login')
   }
+  res.redirect("/blogs")
 })
 
 //------------------
@@ -594,18 +586,6 @@ app.get('/login', (req, res) => {
     console.log('Logged out...')
     res.redirect('/')
   })
-
-// renders a view WITHOUT DATA
-// app.get('/', (req, res) => {
-//     console.log("SESSION: ", req.session)
-//     const model={
-//       style: "home.css",
-//       isLoggedIn: req.session.isLoggedIn,
-//       name: req.session.name,
-//       isAdmin: req.session.isAdmin
-//     }
-//     res.render('home.handlebars', model)
-//   })
 
 // run the server and make it listen to the port
 app.listen(port, () => {
