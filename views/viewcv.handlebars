@@ -1,0 +1,31 @@
+<section id="blog">
+
+    <div class="blog-heading">
+        <span>My Cv</span>
+        <h3>{{cv.cv_title}}</h3>
+    </div> 
+
+    <div class="blog-container">  
+        {{#if dbError}}
+            <div>
+                Sorry, there was a problem with the database:<br />
+                {{theError}}
+            </div>   
+        {{else}}
+        <div class="blog-box">
+            <div class="blog-img">
+                <img src="{{cv.cv_image}}" alt="icon">
+            </div>
+
+            <div class="blog-text">
+                <p>{{{cv.cv_desc}}}</p>
+                {{#if isAdmin}}
+                    <div>
+                        <a href="/home/update/{{cv.cv_id}}"> Modify </a> - <a href="/home/delete/{{cv.cv_id}}" class="important"> Delete </a>
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</section>

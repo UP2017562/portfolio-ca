@@ -96,9 +96,11 @@ db.run("CREATE TABLE cv (cv_id INTEGER PRIMARY KEY, cv_title TEXT, cv_image TEXT
       console.log("---> Table cv created!")
   
       const cv=[
-        { "id":"1", "title":"Information", "image": "/img/infoicon.png", "desc": "Email: caal23tw@student.ju.se <br/>Phone: 0707070707 <br/>Address: Kärrhöksgatan 100"},
-        { "id":"2", "title":"Education", "image": "/img/eduicon.png", "desc": "2020-2025 - University of Portsmouth <br/>2023-2024 - Jonkoping University <br/>2018-2020 - Havant South Downs College <br/>2013-2018 - Oaklands Catholic School"},
-        { "id":"3", "title":"Work Experience", "image": "/img/workicon.png", "desc": "2018 - 1 week: SSE ENERGY </br>2019 - 1 week: SSE ENERGY <br>2019-2023 Morrisons"},
+        { "id":"1", "title":"Information", "image": "/img/infoicon.png", "desc": "Email: caal23tw@student.ju.se <br>Phone: 0707070707 <br>Address: Kärrhöksgatan 100"},
+        { "id":"2", "title":"Education", "image": "/img/eduicon.png", "desc": "2020-2025 - University of Portsmouth <br>2023-2024 - Jonkoping University <br>2018-2020 - Havant South Downs College <br>2013-2018 - Oaklands Catholic School"},
+        { "id":"3", "title":"Work Experience", "image": "/img/workicon.png", "desc": "2018 - 1 week: SSE ENERGY <br>2019 - 1 week: SSE ENERGY <br>2019-2023 Morrisons"},
+        { "id":"4", "title":"Qualifications", "image": "/img/qualiicon.png", "desc": "Pearson BTEC LEVEL 3 EXTENDED DIP. (WAS NATIONAL DIP. 180+) in IT (SOFTWARE DEVELOPMENT) (QCF) <br>Grade: Distinction* Distinction* Distinction* <br>Pearson (Edexcel GCSE’s) Maths: Grade 4 <br>AQA (General Certificate of Secondary Education GCSE’s) <br>Combined Science (Trilogy): 5-4 <br> English Language: 4<br>Spanish: 4"},
+        { "id":"5", "title":"Hobbies", "image": "/img/hobbiesicon.png", "desc": "Swimming, Cycling, Football, Tennis, Attending the gym, Golf, experimenting with emerging technologies."},
       ]
       // inserts blogs
       cv.forEach( (oneCV) => {
@@ -193,6 +195,40 @@ app.get('/', function(req,res){
         isAdmin: req.session.isAdmin
       }
       res.render("home.handlebars", model)
+    }
+  })
+})
+
+//--------------------
+// VIEWS A CV
+//--------------------
+
+app.get('/home/view/:id', (req, res) => {
+  const id = req.params.id
+  db.get("SELECT * FROM cv WHERE cv_id=?", [id], function (error, theCVs) {
+    if (error) {
+      console.log("ERROR: ", error)
+      const model = { 
+        dbError: true, 
+        theError: error,
+        style: "view.css",
+        cv: {},
+        isLoggedIn: req.session.isLoggedIn,
+        name: req.session.name,
+        isAdmin: req.session.isAdmin,
+      }
+      res.render("viewcv.handlebars", model)
+    } else {
+      const model = {
+        style: "view.css", 
+        dbError: false, 
+        theError: "",
+        cv: theCVs,
+        isLoggedIn: req.session.isLoggedIn,
+        name: req.session.name,
+        isAdmin: req.session.isAdmin
+      }
+      res.render("viewcv.handlebars", model)
     }
   })
 })

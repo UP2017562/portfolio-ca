@@ -30,12 +30,13 @@
         {{#each cv}}
         <div class="blog-box">
             <div class="blog-img">
-                <img src="{{cv_image}}" alt="icon">
+                <a href="/home/view/{{cv_id}}">
+                    <img src="{{cv_image}}" alt="icon">
+                </a>
             </div>
 
             <div class="blog-text">
-                <a class="blog-title">{{cv_title}}</a>
-                <p>{{cv_desc}}</p>
+                <a class="blog-title" href="/home/view/{{cv_id}}">{{cv_title}}</a>
                 {{#if ../isAdmin}}
                     <div>
                         <a href="/home/update/{{cv_id}}"> Modify </a> - <a href="/home/delete/{{cv_id}}" class="important"> Delete </a>
