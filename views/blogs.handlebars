@@ -5,12 +5,6 @@
         <h3>My Blogs</h3>
     </div> 
 
-     {{#if isAdmin}}
-        <div>
-            <a href="/blogs/new" class="btn btn-link"> New Blog </a>
-        </div>
-    {{/if}}
-
     <div class="blog-container">
         {{#if dbError}}
             <div>
@@ -38,5 +32,19 @@
             
         {{/each}}
         {{/if}}
+        {{#if isAdmin}}
+        <div class="blog-box">
+            <a href="/blogs/new">
+                <div class="blog-imgnew">
+                    <img src="/img/plusicon.png" alt="blog">
+                </div>
+            </a>
+
+            <div class="blog-text">
+                <a class="blog-title-new" href="/blogs/new">Add a new Blog!</a>
+            </div>
+        </div>
+        {{/if}}
     </div>
 </section>
+

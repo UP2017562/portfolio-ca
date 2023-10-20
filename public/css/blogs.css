@@ -28,7 +28,6 @@ ul {
     align-items: center;
     flex-direction: column;
     padding: 40px;
-    border-bottom: 1px solid black;
 }
 
 .blog-heading {
@@ -61,6 +60,7 @@ ul {
     background-color: #ffffff;
     border: 1px solid #ececec;
     margin: 20px;
+    text-align: center;
 }
 
 .blog-img {
@@ -74,6 +74,22 @@ ul {
     object-fit: cover;
     object-position: center;
 
+}
+
+.blog-imgnew {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.blog-imgnew img {
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .blog-text {

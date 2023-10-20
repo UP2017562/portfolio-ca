@@ -53,7 +53,7 @@ app.use(session({
 
 const db = new sqlite3.Database('portfolio-ca3.db')
 
-db.run("CREATE TABLE user (user_id INTEGER PRIMARY KEY, user_name TEXT NOT NULL, pass_word TEXT NOT NULL, first_name TEXT NOT NULL, last_name TEXT NOT NULL)", (error) => {
+db.run("CREATE TABLE user (user_id INTEGER PRIMARY KEY, user_admin INTEGER,user_name TEXT NOT NULL, user_pword TEXT NOT NULL, user_fname TEXT NOT NULL, user_lname TEXT NOT NULL)", (error) => {
 	if (error) {
       // tests error: display error
       console.log("ERROR: ", error)
@@ -62,12 +62,15 @@ db.run("CREATE TABLE user (user_id INTEGER PRIMARY KEY, user_name TEXT NOT NULL,
       console.log("---> Table users created!")
   
       const user=[
-        { "id":"1", "username":"cameron_alex", "password":"12345", "fname": "Cameron", "lname": "Alexander"},
-        { "id":"2", "username":"jerome_l", "password":"12345", "fname": "Jerome", "lname": "Landre"}
+        { "id":"1", "admin":"1","username":"cameron_alex", "password":"Cameron", "fname": "Cameron", "lname": "Alexander"},
+        { "id":"2", "admin":"1","username":"jerome_l", "password":"Jerome", "fname": "Jerome", "lname": "Landre"},
+        { "id":"3", "admin":"0","username":"steven_g", "password":"Steven", "fname": "Steven", "lname": "George"},
+        { "id":"4", "admin":"0","username":"omar_r", "password":"Omar", "fname": "Omar", "lname": "Rashad"},
+        { "id":"5", "admin":"0","username":"jinesh_p", "password":"Jinesh", "fname": "Jerome", "lname": "patel"},
       ]
       // inserts users
       user.forEach( (oneUser) => {
-        db.run("INSERT INTO user (user_id, user_name, pass_word, first_name, last_name) VALUES (?, ?, ?, ?, ?)", [oneUser.id, oneUser.username, oneUser.password, oneUser.fname, oneUser.lname], (error) => {
+        db.run("INSERT INTO user (user_id, user_admin ,user_name, user_pword, user_fname, user_lname) VALUES (?, ?, ?, ?, ?, ?)", [oneUser.id, oneUser.admin, oneUser.username, oneUser.password, oneUser.fname, oneUser.lname], (error) => {
           if (error) {
             console.log("ERROR: ", error)
           } else {
@@ -88,7 +91,7 @@ db.run("CREATE TABLE cv (cv_id INTEGER PRIMARY KEY, cv_title TEXT, cv_image TEXT
   
       const cv=[
         { "id":"1", "title":"Information", "image": "/img/infoicon.png", "desc": "Email: caal23tw@student.ju.se <br>Phone: 0707070707 <br>Address: Kärrhöksgatan 100"},
-        { "id":"2", "title":"Education", "image": "/img/eduicon.png", "desc": "2020-2025 - University of Portsmouth <br>2023-2024 - Jonkoping University <br>2018-2020 - Havant South Downs College <br>2013-2018 - Oaklands Catholic School"},
+        { "id":"2", "title":"Education", "image": "/img/eduicon.png", "desc": "2020-2025 - University of Portsmouth <br>2023-2024 - Jonkoping University <br>2018-2020 - Havant South Downs College<br>2013-2018 - Oaklands Catholic School"},
         { "id":"3", "title":"Work Experience", "image": "/img/workicon.png", "desc": "2018 - 1 week: SSE ENERGY <br>2019 - 1 week: SSE ENERGY <br>2019-2023 Morrisons"},
         { "id":"4", "title":"Qualifications", "image": "/img/qualiicon.png", "desc": "Pearson BTEC LEVEL 3 EXTENDED DIP. (WAS NATIONAL DIP. 180+) in IT (SOFTWARE DEVELOPMENT) (QCF) <br>Grade: Distinction* Distinction* Distinction* <br>Pearson (Edexcel GCSE’s) Maths: Grade 4 <br>AQA (General Certificate of Secondary Education GCSE’s) <br>Combined Science (Trilogy): 5-4 <br> English Language: 4<br>Spanish: 4"},
         { "id":"5", "title":"Hobbies", "image": "/img/hobbiesicon.png", "desc": "Swimming, Cycling, Football, Tennis, Attending the gym, Golf, experimenting with emerging technologies."},
@@ -117,7 +120,9 @@ db.run("CREATE TABLE blog (blog_id INTEGER PRIMARY KEY, blog_uid INTEGER, blog_t
       const blog=[
         { "id":"1", "uid":"1", "title":"Sweden", "image": "/img/Sweden.jpeg", "desc": "Currently I am in Sweden enjoying an exchange year!!! Meeting loads of new friends!", "date": "19/08/2023"},
         { "id":"2", "uid":"1", "title":"Second Year Uni", "image": "/img/Portsmouth.jpeg", "desc": "I have just completed my second year of University, now onto the last year! or hopefully a year in sweden :)", "date": "02/06/2023"},
-        { "id":"3", "uid":"1", "title":"Completing Project", "image": "/img/Coding.jpeg", "desc": "Me and our team has completed our group project, was not fully done but everything is now completed", "date": "30/05/2023"}
+        { "id":"3", "uid":"1", "title":"Completing Project", "image": "/img/Coding.jpeg", "desc": "Me and our team has completed our group project, was not fully done but everything is now completed", "date": "30/05/2023"},
+        { "id":"4", "uid":"1", "title":"Start of Football", "image": "/img/football.jpeg", "desc": "I have just started playing football 5 a side, i am having great fun as well as learning team building", "date": "29/02/2023"},
+        { "id":"5", "uid":"1", "title":"Second Year Uni", "image": "/img/students.jpeg", "desc": "I have just completed the first half of uni for the second year and it went great!", "date": "15/12/2022"},
       ]
       // inserts blogs
       blog.forEach( (oneBlog) => {
@@ -275,7 +280,7 @@ app.get('/home/update/:id', (req, res) => {
       const model = { 
         dbError: true, 
         theError: error,
-        style: "blogs.css",
+        style: "new.css",
         cv: {},
         isLoggedIn: req.session.isLoggedIn,
         name: req.session.name,
@@ -284,7 +289,7 @@ app.get('/home/update/:id', (req, res) => {
       res.render("modifyhome.handlebars", model)
     } else {
       const model = {
-        style: "blogs.css", 
+        style: "new.css", 
         dbError: false, 
         theError: "",
         cv: theCVs,
@@ -553,27 +558,38 @@ app.get('/login', (req, res) => {
     res.render('login.handlebars', model)
   });
   
-  app.post('/login', (req, res) => {
-    const un = req.body.un
-    const pw = req.body.pw
-  
-    console.log("LOGIN: ", un)
-    console.log("PASSWORD: ", pw)
-  
-    if (un=="cameron" && pw=="1234") {
-      console.log("Cameron is logged in!")
-      req.session.isAdmin = true
-      req.session.isLoggedIn = true
-      req.session.name = "Cameron"
-      res.redirect('/')
+app.post('/login', (req, res) => {
+  const un = req.body.un;
+  const pw = req.body.pw;
+
+  // Query the database to check if the username and password are valid
+  db.get("SELECT * FROM user WHERE user_name = ? AND user_pword = ?", [un, pw], (error, row) => {
+    if (error) {
+      console.error("Database error:", error);
+      res.redirect('/login');
+    } else if (row) {
+      console.log("User logged in:", un);
+      req.session.isLoggedIn = true;
+      req.session.name = row.first_name;
+
+      // Check if the user is an admin (user_admin = 1)
+      if (row.user_admin === 1) {
+        req.session.isAdmin = true;
+      } else {
+        req.session.isAdmin = false;
+      }
+
+      res.redirect('/');
     } else {
-      console.log('Bad user and/or bad password')
-      req.session.isAdmin = false
-      req.session.isLoggedIn = false
-      req.session.name = ""
-      res.redirect('/login')
+      console.log('Bad user and/or bad password');
+      req.session.isAdmin = false;
+      req.session.isLoggedIn = false;
+      req.session.name = "";
+      res.redirect('/login');
     }
-  })
+  });
+});
+  
   
   // ------------
   // LOG OUT

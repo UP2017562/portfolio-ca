@@ -1,29 +1,26 @@
-<div id="main">
-    <div>
-        <h1>Modify CV</h1>
-        <div>
+<div class="main">
+    <div class="contact-in">
+        <div class="contact-form">
+            <h1>Modifying CV!</h1>
             {{#if isLoggedIn}}
                 {{#if isAdmin}}
                     <form action="/home/update/{{cv.cv_id}}" method="post">
                        <fieldset>
                             <label for="cvtitle">CV Title: </label>
-                            <input type="text" name="cvtitle" id="cvtitle" value="{{cv.cv_title}}" required="required">
-                            <br />
-                            <label for="cvimage">CV image URL: </label>
-                            <input type="text" name="cvimage" id="cvimage" value="{{cv.cv_image}}" required="required">
-                            <br />
+                            <input type="text" name="cvtitle" id="cvtitle" value="{{cv.cv_title}}" required="required" class="contact-form-txt">
                             <label for="cvdesc">CV Description: </label>
-                            <textarea name="cvdesc" id="cvdesc" cols="30" rows="10" value="{{cv.cv_desc}}" required="required"></textarea>
-                            <br />
+                            <textarea name="cvdesc" id="cvdesc" required="required" class="contact-form-txtarea">{{cv.cv_desc}}</textarea>
+                            <label for="cvimage">Blog image URL: </label>
+                            <input type="text" name="cvimage" id="cvimage" value="{{cv.cv_image}}" required="required" class="contact-form-txt">
+                            <button type="submit" class="btn">Modify</button>
                         </fieldset>
-                        <input type="submit" value="Update CV">
                     </form>
                 {{else}}
-                    <p>Sorry, you must be an administrator to add a new CV!</p>
+                    <p>Sorry, you must be an administrator to add a new blog!</p>
                 {{/if}}
             {{else}}
                 <p>
-                    Sorry, you must be logged in to add a new CV! <br />
+                    Sorry, you must be logged in to add a new blog! <br />
                     Please go to the <a href="/login">Login</a> page.
                 </p>
             {{/if}}
