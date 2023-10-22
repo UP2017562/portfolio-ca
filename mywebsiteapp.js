@@ -96,7 +96,7 @@ db.run("CREATE TABLE cv (cv_id INTEGER PRIMARY KEY, cv_title TEXT, cv_image TEXT
         { "id":"4", "title":"Qualifications", "image": "/img/qualiicon.png", "desc": "Pearson BTEC LEVEL 3 EXTENDED DIP. (WAS NATIONAL DIP. 180+) in IT (SOFTWARE DEVELOPMENT) (QCF) <br>Grade: Distinction* Distinction* Distinction* <br>Pearson (Edexcel GCSE’s) Maths: Grade 4 <br>AQA (General Certificate of Secondary Education GCSE’s) <br>Combined Science (Trilogy): 5-4 <br> English Language: 4<br>Spanish: 4"},
         { "id":"5", "title":"Hobbies", "image": "/img/hobbiesicon.png", "desc": "Swimming, Cycling, Football, Tennis, Attending the gym, Golf, experimenting with emerging technologies."},
       ]
-      // inserts blogs
+      // inserts cv
       cv.forEach( (oneCV) => {
         db.run("INSERT INTO cv (cv_id, cv_title, cv_image, cv_desc) VALUES (?, ?, ?, ?)", [oneCV.id, oneCV.title, oneCV.image, oneCV.desc], (error) => {
           if (error) {
@@ -147,9 +147,12 @@ db.run("CREATE TABLE submit (submit_id INTEGER PRIMARY KEY, submit_name TEXT, su
   
       const submit=[
         { "id":"1", "name":"Steven", "email":"steven.cool@gmail.com", "desc": "Hey, i am interested, can you please contact me when you are free!!"},
-        { "id":"2", "name":"Goerge", "email":"george.cool2@gmail.com", "desc": "Hey i wanted to say i love your website and your blogs"}
+        { "id":"2", "name":"Goerge", "email":"george.cool2@gmail.com", "desc": "Hey i wanted to say i love your website and your blogs"},
+        { "id":"3", "name":"Sophie", "email":"Sophie.cool3@gmail.com", "desc": "Hey can you contact me, am interested"},
+        { "id":"4", "name":"Jinesh", "email":"jinesh.pate@gmail.com", "desc": "Hey long time no see, contact me"},
+        { "id":"5", "name":"Omar", "email":"omar.rash@gmail.com", "desc": "cool website bro, great job"}
       ]
-      // inserts blogs
+      // inserts submit
       submit.forEach( (oneSubmit) => {
         db.run("INSERT INTO submit (submit_id, submit_name, submit_email, submit_desc) VALUES (?, ?, ?, ?)", [oneSubmit.id, oneSubmit.name, oneSubmit.email, oneSubmit.desc], (error) => {
           if (error) {
@@ -233,7 +236,7 @@ app.get('/home/view/:id', (req, res) => {
 // CREATES NEW CV
 //--------------------
 
-// SENDS THE FORM FOR A NEW PROJECT
+// SENDS THE FORM FOR A NEW CV
 app.get('/home/new', (req, res) => {
   if (req.session.isLoggedIn==true && req.session.isAdmin==true) {
     const model = {
@@ -248,7 +251,7 @@ app.get('/home/new', (req, res) => {
   }
 })
 
-// CREATES NEW PROJECT
+// CREATES NEW CV
 app.post('/home/new', (req, res) => {
   const newp = [
     req.body.cvtitle, req.body.cvimage, req.body.cvdesc,
@@ -271,7 +274,7 @@ app.post('/home/new', (req, res) => {
 // MODIFY A CV
 //-----------------
 
-//SENDS TEH FORM TO MODIFY A PROJECT
+//SENDS TEH FORM TO MODIFY A CV
 app.get('/home/update/:id', (req, res) => {
   const id = req.params.id
   db.get("SELECT * FROM cv WHERE cv_id=?", [id], function (error, theCVs) {
@@ -394,7 +397,7 @@ app.get('/blogs', function(req,res){
 // CREATES NEW BLOG
 //--------------------
 
-// SENDS THE FORM FOR A NEW PROJECT
+// SENDS THE FORM FOR A NEW BLOG
 app.get('/blogs/new', (req, res) => {
   if (req.session.isLoggedIn==true && req.session.isAdmin==true) {
     const model = {
@@ -432,7 +435,7 @@ app.post('/blogs/new', (req, res) => {
 // MODIFY A BLOG
 //-----------------
 
-//SENDS TEH FORM TO MODIFY A PROJECT
+//SENDS TEH FORM TO MODIFY A BLOG
 app.get('/blogs/update/:id', (req, res) => {
   const id = req.params.id
   db.get("SELECT * FROM blog WHERE blog_id=?", [id], function (error, theBlogs) {
