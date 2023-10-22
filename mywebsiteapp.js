@@ -42,9 +42,9 @@ const SQLiteStore = connectSqlite3(session);
 
 app.use(session({
   store: new SQLiteStore({db: "session-db.db"}),
-  "saveUninitialized": false,
-  "resave": false,
-  "secret": "This123Is@Another#456GreatSecret678%Sentence"
+  saveUninitialized: false,
+  resave: false,
+  secret: "This123Is@Another#456GreatSecret678%Sentence"
 }));
 
 //-------------------------------
@@ -570,7 +570,7 @@ app.post('/login', (req, res) => {
     } else if (row) {
       console.log("User logged in:", un);
       req.session.isLoggedIn = true;
-      req.session.name = row.first_name;
+      req.session.name = row.user_fname;
 
       // Check if the user is an admin (user_admin = 1)
       if (row.user_admin === 1) {
